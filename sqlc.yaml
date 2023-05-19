@@ -1,0 +1,31 @@
+version: "2"
+sql:
+  - engine: "postgresql"
+    queries: "db/queries/"
+    schema: "db/migrations/"
+    gen:
+      go:
+        package: "sqlc"
+        out: "src/modules/generated/sql"
+        overrides:
+          - db_type: "text"
+            go_type:
+              type: "string"
+              pointer: true
+            nullable: true
+          - db_type: "pg_catalog.bool"
+            go_type:
+              type: "bool"
+              pointer: true
+            nullable: true
+
+          - db_type: "pg_catalog.int"
+            go_type:
+              type: "int"
+              pointer: true
+            nullable: true
+          - db_type: "pg_catalog.int4"
+            go_type:
+              type: "int"
+              pointer: true
+            nullable: true
