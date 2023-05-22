@@ -21,18 +21,14 @@ func main() {
 	if err != nil {
 		panic("cannot init database connection ")
 	}
-
 	module := common.Bundler{
+    Imports: []common.Bundler {
+      user.UserModule,
+    },
 		Queries: queries,
     Router: common.RouteBuilder{App: app}.CreateRouteBuilder(),
-		Controllers: []common.IController{
-			new(user.UserController),
-		},
-		Services: []interface{}{
-			new(user.UserService),
-		},
 	}
-	module.Bundle()
+	module.Bundle(nil, nil)
 	log.Fatal(app.Listen(":3000"))
 
 }
