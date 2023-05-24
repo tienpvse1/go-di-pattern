@@ -6,10 +6,10 @@ import (
 )
 
 type UserService struct {
-  Queries *sqlc.Queries `inject:"sqlc_queries"`
-  Context context.Context 
+	Queries *sqlc.Queries `inject:"sqlc_queries"`
+	Context context.Context
 }
 
-func (service UserService) FindOne()([]sqlc.Author, error){
-  return service.Queries.ListAuthors(context.Background())
+func (service UserService) FindOne() ([]sqlc.Author, error) {
+	return service.Queries.ListAuthors(context.Background())
 }
