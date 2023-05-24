@@ -9,16 +9,21 @@ func (bundler Bundler) Bundle(router *Router, queries *sqlc.Queries) {
 
   var queriesInstance *sqlc.Queries
   var routerInstance *Router
+  // use the queries property if exists. Otherwise, use the parameter 
+  // due to no ternary operation support in go, if-else are required 
   if bundler.Queries != nil {
     queriesInstance = bundler.Queries
   }else {
     queriesInstance = queries
   }
+  // the same thing happen to router instance
   if bundler.Router != nil {
     routerInstance = bundler.Router
   }else {
     routerInstance = router
   }
+  
+  // only call bundle on imports instance if their exists
 	if bundler.Imports != nil && len(bundler.Imports) > 0 {
 		for _, importInstance := range bundler.Imports {
 			importInstance.Bundle(bundler.Router, bundler.Queries)

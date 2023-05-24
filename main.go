@@ -22,11 +22,11 @@ func main() {
 		panic("cannot init database connection ")
 	}
 	module := common.Bundler{
-    Imports: []common.Bundler {
-      user.UserModule,
-    },
+		Imports: []common.Bundler{
+			user.UserModule,
+		},
 		Queries: queries,
-    Router: common.RouteBuilder{App: app}.CreateRouteBuilder(),
+		Router:  common.RouteBuilder{App: app}.CreateRouteBuilder(),
 	}
 	module.Bundle(nil, nil)
 	log.Fatal(app.Listen(":3000"))
